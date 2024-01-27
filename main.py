@@ -63,4 +63,5 @@ def readpdf(path):
         return full_text
 
 # inciar o bot 
-client.run('MTA2MjAxMjQwMTg0NDc2MDY2Ng.G7HfLG.fTfhtLBnrLf7ZMm3Erhg6pU4i5k5F48Lns2zXo') 
+token = os.environ['TOKEN']
+client.run(token)
