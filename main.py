@@ -88,14 +88,12 @@ def readpdf(path):
 
         return full_text
 
-def run_bot():
-  token = os.environ['TOKEN']
-  client.run(token)
 #inicia o bot
 if __name__ == "__main__":
   t = Thread(target=run)
   t.start()
-    try:
-        run_bot()
-    except Exception as e:
-        print('Deu algum erro:', e)
+  try:
+    token = os.environ['TOKEN']
+    client.run(token)
+  except Exception as e:
+    print('Deu algum erro:', e)
