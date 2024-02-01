@@ -3,6 +3,32 @@ from discord.ext import commands
 import asyncio
 import PyPDF2
 import os
+from threading import Thread
+from datetime import datetime
+from flask import Flask, render_template
+
+
+#### keep-alive
+app = Flask(__name__)
+r = {}
+r_s = 0
+now = datetime.now()
+
+@app.route('/')
+def hello():
+  return render_template('index.html',
+                         now=now,
+                         now2=datetime.now(),
+                         code=r,
+                         rs=r_s)
+
+def run():
+  app.run(host='0.0.0.0', port=8080)
+
+def keep_alive():
+  t = Thread(target=run)
+  t.start()
+#######
 
 prefix = '/' 
 client = commands.Bot(command_prefix=prefix, intents=discord.Intents.all())
@@ -62,6 +88,12 @@ def readpdf(path):
 
         return full_text
 
-# inciar o bot 
-token = os.environ['TOKEN']
-client.run(token)
+#inicia o bot
+if __name__ == "__main__":
+  t = Thread(target=run)
+  t.start()
+    try:
+        token = os.environ['TOKEN']
+        client.run(token)
+    except Exception as e:
+        print('Deu algum erro:', e)
