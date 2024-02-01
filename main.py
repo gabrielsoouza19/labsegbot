@@ -93,8 +93,7 @@ if __name__ == "__main__":
   t = Thread(target=run)
   t.start()
   try:
-    token = os.environ['TOKEN']
-    print(token)
+    token = os.environ['TOKEN_D']
     client.run(token)
   except Exception as e:
     print('Deu algum erro:', e)
